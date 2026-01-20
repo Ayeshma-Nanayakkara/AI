@@ -1,0 +1,161 @@
+---
+title: "Solving Problems by Searching"
+author: "Ayeshma Nanayakkara"
+format:
+  revealjs:
+    embed-resources: true
+    standalone: true
+    theme: Default
+    slide-number: true
+    transition: slide
+    background-transition: fade
+    height: 900
+---
+
+# Informed (Heuristic) Search Strategies
+
+-   Use problem‐specific knowledge
+
+-   Applications:
+
+    -   Navigation and Path finding : GPS Navigation
+
+    -   Natural Language Processing: Machine Translation
+
+    -   Game Playing: Chess, tic-tac-toe
+
+    -   Robotics and Autonomous Systems
+
+------------------------------------------------------------------------
+
+-   Efficient than uninformed search strategies
+
+-   General approach:
+
+    -   best‐*first* search \[node is selected for expansion based on an evaluation function *f(n)*\]
+
+    -   *f(n)* measures distance to goal from node n
+
+-   Expand node with lowest f‐value
+
+-   An instance of TREE‐SEARCH algorithm with a priority queue (ordered by f ) for the frontier
+
+-   Key component of f: a heuristic function h(n), estimated cost of cheapest path from node n to a goal node
+
+------------------------------------------------------------------------
+
+## Greedy Best-First Search
+
+Nodes are expanded based on: $$
+f(n) = h(n)
+$$
+
+---
+
+Example: Route finding problem (Agent in city A, wishes to go to city M)
+
+![](images/clipboard-3146543195.png){width="1000"}
+
+------------------------------------------------------------------------
+
+• Straight‐line distances (SLD), in km, from city M are given below
+
+|      |     |     |      |     |     |      |     |
+|------|-----|-----|------|-----|-----|------|-----|
+| City | SLD |     | City | SLD |     | City | SLD |
+| A    | 366 |     | F    | 244 |     | K    | 160 |
+| B    | 374 |     | G    | 241 |     | L    | 100 |
+| C    | 380 |     | H    | 242 |     | M    | 0   |
+| D    | 253 |     | I    | 193 |     | N    | 80  |
+| E    | 329 |     | J    | 176 |     | O    | 77  |
+
+------------------------------------------------------------------------
+
+![](images/clipboard-2296880379.png)
+
+------------------------------------------------------------------------
+
+## A\* Search
+
+-   Most widely‐known form of best‐first search
+-   Google Maps uses A* algorithm 
+-   Evaluates nodes using: $$
+    f(n) = g(n) + h(n)
+    $$
+-   g(n): cost to reach node n from initial state
+-   h(n): estimated cost of cheapest path to goal from node n
+-   f(n): estimated cost of cheapest solution through node n
+
+Example: 8-Puzzle Game
+
+------------------------------------------------------------------------
+
+![](images/clipboard-757582772.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+![](images/clipboard-3244613625.png)
+
+------------------------------------------------------------------------
+
+## Local Search Algorithms
+
+-   Operate using a single current state and move only to neighbors of that state
+
+-   Paths followed by search are not retained (only one path in memory)
+
+-   Pros: Less memory usage
+
+-   Cons: Fast but incomplete due to stop in local maxima
+
+------------------------------------------------------------------------
+
+### Hill Climbing \[steepest‐ascent version\]
+
+-   Moves in the direction of uphill
+
+-   Terminates when reaches a “peak” where no neighbor is better
+
+**function** HILL‐CLIMBING(*problem*) **returns** a state that has a maximum\
+*current*\<-MAKE‐NODE(*problem*.INITIAL‐STATE)\
+**loop do**\
+*neighbor*\<-a lowest heuristic valued successor of *current*\
+**if**\
+*neighbor*.HEURISTIC\>=*current*.HEURISTIC **then return** *current*.STATE *current*\<-neighbor
+
+------------------------------------------------------------------------
+
+**Example (8-Queens Problem):**
+
+![](images/clipboard-3653060825.png)
+
+------------------------------------------------------------------------
+
+-   A queen attacks any piece in the same row, column, or diagonal.
+
+-   \(a\) An 8-queens state with heuristic cost estimate h = 17. The board shows the value of h for each possible successor obtained by moving a queen within its column.
+
+-   \(b\) place 8 queens on a chess board so that no queen attacks another (h=1). This position is almost a solution, except for the two queens in the fourth and seventh columns that attack each other along the diagonal
+
+------------------------------------------------------------------------
+
+![](images/clipboard-3586283404.png){fig-align="center"}
+
+-   Local Maximum: A state better than it's neighbors but not the best
+
+-   Global Maximum: State highest value of objective function
+
+-   Current state: Present state of an agent
+
+-   Flat local maximum: Flat space where all neighbors have the same value.
+
+-   Shoulder: Plateau region which has an up hill edge.It can be a flat local Plateau maximum, from which no uphill exit exists
+
+------------------------------------------------------------------------
+
+## References
+
+-   Artificial Intelligence: A Modern Approach, Russell, S. and Norvig, P., Pearson, Fourth Edition, 2022
+-   Artificial Intelligence: Structures and Strategies for Complex Problems Solving, Lurger GF, Addison Wesley, Sixth Edition, 2008
+
+**Thank You!**
